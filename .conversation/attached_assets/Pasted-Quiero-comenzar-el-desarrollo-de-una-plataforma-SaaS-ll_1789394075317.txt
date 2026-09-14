@@ -1,0 +1,213 @@
+Quiero comenzar el desarrollo de una plataforma SaaS llamada FANSYCLUB.
+
+IMPORTANTE:
+No construyas toda la plataforma todavía.
+Esta tarea corresponde únicamente a la FASE 001 — FOUNDATION.
+
+FANSYCLUB será una plataforma multi-tenant para artistas, creadores y emprendedores. Cada usuario podrá tener posteriormente su propio "World" accesible mediante un subdominio como:
+
+treenty.fansyclub.com
+
+La plataforma tendrá tres áreas principales:
+
+1. FANSYCLUB WORLD
+   Página pública de cada usuario.
+
+2. FANSYCLUB STUDIO
+   Panel privado donde cada propietario administra su World.
+
+3. FANSYCLUB CONTROL CENTER
+   Panel administrativo privado de la empresa FANSYCLUB, con acceso exclusivo para OWNER y STAFF autorizados.
+
+OBJETIVO DE ESTA FASE:
+
+Construir una base técnica limpia, escalable y preparada para las siguientes fases.
+
+REQUISITOS:
+
+1. Crear una aplicación web moderna utilizando TypeScript.
+
+2. Separar correctamente frontend y backend de forma que la arquitectura pueda crecer.
+
+3. Utilizar PostgreSQL como base de datos.
+
+4. Utilizar un ORM apropiado para PostgreSQL, preferiblemente Drizzle ORM si no existe una razón técnica para utilizar otra opción.
+
+5. Implementar autenticación segura mediante sesiones. No almacenar contraseñas en texto plano.
+
+6. Crear el modelo User.
+
+El modelo User debe contemplar como mínimo:
+
+* id
+* name
+* email
+* username
+* passwordHash
+* status
+* role
+* createdAt
+* updatedAt
+* lastLoginAt
+
+7. Crear roles iniciales:
+
+* USER
+* OWNER
+* STAFF
+
+No utilizar emails hardcodeados para determinar permisos.
+
+8. Crear un sistema de autorización basado en roles y permisos.
+
+9. Crear el modelo World.
+
+Un World debe pertenecer a un usuario/owner y debe contemplar como mínimo:
+
+* id
+* ownerId
+* name
+* slug
+* status
+* createdAt
+* updatedAt
+
+El slug debe permitir posteriormente resolver subdominios como:
+
+slug.fansyclub.com
+
+10. Crear la relación User → World de forma que la arquitectura pueda evolucionar posteriormente para permitir que un usuario administre múltiples Worlds y que un World pueda tener colaboradores.
+
+NO asumir que siempre existirá una relación rígida de un usuario = un World.
+
+11. Crear una estructura inicial para permisos administrativos.
+
+Debe ser posible posteriormente implementar:
+
+OWNER
+→ acceso completo
+
+STAFF
+→ permisos específicos
+
+USER
+→ acceso únicamente a sus propios recursos
+
+12. Crear protección real en backend para rutas privadas.
+
+No confiar únicamente en ocultar botones o páginas en frontend.
+
+13. Crear tres áreas de routing conceptuales:
+
+PUBLIC WORLD
+STUDIO
+CONTROL CENTER
+
+Todavía NO es necesario construir sus interfaces completas.
+
+14. Crear una estructura preparada para futuras entidades:
+
+* Pages
+* Sections
+* Blocks
+* Assets
+* Music
+* Releases
+* Tracks
+* Products
+* Orders
+* Transactions
+* Followers
+* Communities
+* Events
+* Subscriptions
+* Analytics
+* Notifications
+* AuditLogs
+* SecurityEvents
+
+NO implementar todavía toda la lógica de estas entidades. Solo dejar una arquitectura limpia que permita incorporarlas posteriormente sin rehacer el proyecto.
+
+15. Crear configuración mediante variables de entorno.
+
+Nunca colocar secretos, contraseñas, API keys o credenciales directamente en el código.
+
+16. Crear una estructura preparada para desarrollo y producción.
+
+17. Preparar el proyecto para Git/GitHub.
+
+18. Crear documentación básica del proyecto explicando:
+
+* arquitectura
+* estructura de carpetas
+* variables de entorno necesarias
+* cómo ejecutar localmente
+* cómo ejecutar migraciones
+* cómo crear la base de datos
+* cómo iniciar el servidor
+* cómo ejecutar tests si existen
+
+19. Implementar validación de datos en backend.
+
+20. Implementar manejo básico de errores.
+
+21. Implementar protección básica contra abuso en endpoints de autenticación, como rate limiting apropiado.
+
+22. Crear una estructura inicial para Audit Logs y Security Events, aunque todavía no necesitemos registrar todas las operaciones de la plataforma.
+
+23. No integrar todavía pagos reales.
+
+24. No implementar todavía el constructor visual.
+
+25. No implementar todavía la tienda.
+
+26. No implementar todavía el sistema musical.
+
+27. No implementar todavía comunidades.
+
+28. No implementar todavía analytics avanzado.
+
+29. No crear datos ficticios que puedan confundirse con datos reales de producción.
+
+30. Mantener el código modular y evitar una arquitectura monolítica desordenada.
+
+CRITERIOS DE ACEPTACIÓN:
+
+Al finalizar esta fase debe ser posible:
+
+* registrar un usuario
+* iniciar sesión
+* cerrar sesión
+* proteger una ruta privada
+* crear un World asociado al usuario
+* consultar el World del usuario
+* comprobar permisos mediante backend
+* distinguir USER, STAFF y OWNER
+* ejecutar migraciones de base de datos
+* ejecutar la aplicación correctamente
+* entender claramente la estructura del proyecto
+
+ANTES DE MODIFICAR EL PROYECTO:
+
+Primero inspecciona el entorno actual de Replit y determina qué estructura/proyecto existe.
+
+Si el proyecto está vacío, crea la estructura desde cero.
+
+Si ya existe código, NO lo elimines automáticamente. Analízalo primero y explica qué conservarás o modificarás.
+
+NO avances a funcionalidades de fases posteriores.
+
+Al terminar, proporciona un resumen técnico de:
+
+1. qué construiste
+2. estructura del proyecto
+3. modelos creados
+4. rutas creadas
+5. sistema de autenticación
+6. sistema de autorización
+7. variables de entorno
+8. migraciones
+9. pruebas realizadas
+10. problemas pendientes
+
+No inventes que algo funciona si no lo verificaste ejecutándolo.

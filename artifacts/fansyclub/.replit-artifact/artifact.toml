@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "FANSYCLUB"
+description = "Foundation de una plataforma SaaS multi-tenant para artistas, creadores y emprendedores, con autenticación, Worlds públicos y áreas preparadas para Studio y Control Center."
+version = "1.0.0"
+id = "artifacts/fansyclub"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18831
+
+[services.development]
+run = "pnpm --filter @workspace/fansyclub run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/fansyclub", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/fansyclub/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18831"
+BASE_PATH = "/"

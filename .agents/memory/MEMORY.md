@@ -1,0 +1,1 @@
+- [Artifact build environment](artifact-build-environment.md) — direct Vite builds need workflow-provided PORT and BASE_PATH; typecheck remains the local baseline.

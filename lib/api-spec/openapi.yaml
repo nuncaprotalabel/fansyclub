@@ -10,6 +10,12 @@ servers:
 tags:
   - name: health
     description: Health operations
+  - name: auth
+    description: Session-based authentication
+  - name: worlds
+    description: Public and private World resources
+  - name: access
+    description: Role and permission checks
 paths:
   /healthz:
     get:
@@ -24,6 +30,187 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/HealthStatus"
+  /auth/register:
+    post:
+      operationId: register
+      tags: [auth]
+      summary: Register a user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/RegisterInput"
+      responses:
+        "201":
+          description: User registered and signed in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "409":
+          description: Email or username already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "422":
+          description: Invalid registration data
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /auth/login:
+    post:
+      operationId: login
+      tags: [auth]
+      summary: Start a session
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LoginInput"
+      responses:
+        "200":
+          description: User signed in
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+        "401":
+          description: Invalid credentials
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /auth/logout:
+    post:
+      operationId: logout
+      tags: [auth]
+      summary: End the current session
+      responses:
+        "204":
+          description: Session ended
+  /auth/me:
+    get:
+      operationId: getCurrentUser
+      tags: [auth]
+      summary: Get the signed-in user
+      responses:
+        "200":
+          description: Current user
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/User"
+        "401":
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /worlds:
+    get:
+      operationId: listMyWorlds
+      tags: [worlds]
+      summary: List Worlds owned or administered by the current user
+      responses:
+        "200":
+          description: Worlds visible to the current user
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/World"
+        "401":
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+    post:
+      operationId: createWorld
+      tags: [worlds]
+      summary: Create a World for the current user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/WorldInput"
+      responses:
+        "201":
+          description: World created
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/World"
+        "401":
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+        "409":
+          description: Slug already exists
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /worlds/{slug}:
+    get:
+      operationId: getPublicWorld
+      tags: [worlds]
+      summary: Resolve a public World by slug
+      parameters:
+        - name: slug
+          in: path
+          required: true
+          schema:
+            type: string
+            minLength: 3
+            maxLength: 80
+      responses:
+        "200":
+          description: Public World
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/World"
+        "404":
+          description: World not found
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
+  /access/check:
+    get:
+      operationId: checkAccess
+      tags: [access]
+      summary: Check a permission for the current user
+      parameters:
+        - name: permission
+          in: query
+          required: true
+          schema:
+            type: string
+            minLength: 1
+            maxLength: 120
+      responses:
+        "200":
+          description: Permission decision
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/AccessCheck"
+        "401":
+          description: Authentication required
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ErrorResponse"
 components:
   schemas:
     HealthStatus:
@@ -33,4 +220,154 @@ components:
           type: string
       required:
         - status
+    ErrorResponse:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+      required:
+        - error
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        email:
+          type: string
+          format: email
+        username:
+          type: string
+        status:
+          type: string
+          enum: [ACTIVE, SUSPENDED, PENDING]
+        role:
+          type: string
+          enum: [USER, OWNER, STAFF]
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        lastLoginAt:
+          type: ["string", "null"]
+          format: date-time
+      required:
+        - id
+        - name
+        - email
+        - username
+        - status
+        - role
+        - createdAt
+        - updatedAt
+        - lastLoginAt
+    AuthResponse:
+      type: object
+      properties:
+        user:
+          $ref: "#/components/schemas/User"
+      required:
+        - user
+    RegisterInput:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 120
+        email:
+          type: string
+          format: email
+        username:
+          type: string
+          minLength: 3
+          maxLength: 40
+          pattern: "^[a-zA-Z0-9_]+$"
+        password:
+          type: string
+          minLength: 10
+          maxLength: 128
+      required:
+        - name
+        - email
+        - username
+        - password
+    LoginInput:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+          minLength: 1
+          maxLength: 128
+      required:
+        - email
+        - password
+    World:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        ownerId:
+          type: string
+          format: uuid
+        name:
+          type: string
+        slug:
+          type: string
+        status:
+          type: string
+          enum: [DRAFT, PUBLISHED, SUSPENDED]
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+      required:
+        - id
+        - ownerId
+        - name
+        - slug
+        - status
+        - createdAt
+        - updatedAt
+    WorldInput:
+      type: object
+      properties:
+        name:
+          type: string
+          minLength: 2
+          maxLength: 120
+        slug:
+          type: string
+          minLength: 3
+          maxLength: 80
+          pattern: "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+      required:
+        - name
+        - slug
+    AccessCheck:
+      type: object
+      properties:
+        allowed:
+          type: boolean
+        permission:
+          type: string
+        role:
+          type: string
+          enum: [USER, OWNER, STAFF]
+      required:
+        - allowed
+        - permission
+        - role
 
