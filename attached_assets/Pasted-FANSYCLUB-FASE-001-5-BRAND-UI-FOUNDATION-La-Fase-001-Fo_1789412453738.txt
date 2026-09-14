@@ -1,0 +1,426 @@
+FANSYCLUB — FASE 001.5: BRAND & UI FOUNDATION
+
+La Fase 001 — Foundation ya fue completada y verificada.
+
+AHORA quiero realizar únicamente una mejora de identidad visual y experiencia de usuario sobre la aplicación existente.
+
+IMPORTANTE:
+
+NO reconstruyas la aplicación desde cero.
+
+NO reemplaces la arquitectura existente.
+
+NO elimines funcionalidades existentes.
+
+NO modifiques innecesariamente la autenticación, base de datos, API, modelos, permisos o estructura backend.
+
+Esta fase es principalmente FRONTEND / UI / DESIGN SYSTEM.
+
+==================================================
+OBJETIVO
+==================================================
+
+Quiero que FANSYCLUB tenga una identidad visual propia y coherente basada en el logo oficial que existe en el proyecto.
+
+El logo oficial se encuentra en:
+
+fansyclub-logo.png
+
+Utiliza ese logo como referencia visual principal.
+
+NO rediseñes ni alteres el logo.
+
+==================================================
+IDENTIDAD VISUAL
+==================================================
+
+El logo utiliza principalmente:
+
+- verde
+- azul
+- blanco
+- negro
+
+con una estética pixel-art que representa visualmente una combinación de:
+
+- mundo
+- comunidad
+- conexión
+- identidad digital
+- FANSYCLUB
+
+La interfaz NO debe convertirse en una interfaz pixel-art.
+
+El pixel-art debe ser un elemento distintivo de la identidad, mientras que la plataforma debe sentirse:
+
+- moderna
+- profesional
+- tecnológica
+- limpia
+- intuitiva
+- premium
+- amigable
+- accesible
+- escalable
+
+Debe parecer un producto SaaS profesional y moderno.
+
+==================================================
+DESIGN SYSTEM
+==================================================
+
+Crear una base de Design System reutilizable.
+
+Definir variables/tokens para:
+
+- colores
+- background
+- surface
+- primary
+- secondary
+- text
+- muted text
+- border
+- success
+- warning
+- error
+- focus
+- spacing
+- border radius
+- shadows
+- typography
+
+No repetir valores visuales arbitrariamente por todos los componentes.
+
+Centralizar el sistema visual.
+
+==================================================
+COLORES
+==================================================
+
+Utilizar el logo como referencia para establecer la paleta.
+
+No llenar toda la interfaz de verde y azul.
+
+La mayor parte de la interfaz debe ser limpia y equilibrada.
+
+Utilizar:
+
+- fondos neutros
+- superficies claras u oscuras según el contexto
+- verde y azul como colores de identidad/acento
+- blanco y negro para contraste
+- estados de éxito/error/advertencia claramente diferenciados
+
+La interfaz debe mantener excelente legibilidad.
+
+==================================================
+LOGO
+==================================================
+
+Utilizar:
+
+fansyclub-logo.png
+
+en los lugares apropiados.
+
+Principalmente:
+
+- landing page
+- login
+- registro
+- navegación
+- Studio
+- Control Center cuando corresponda
+
+No deformar el logo.
+
+Mantener proporciones originales.
+
+No aplicar filtros innecesarios.
+
+==================================================
+LANDING PAGE
+==================================================
+
+Mejorar visualmente la página principal existente.
+
+Debe comunicar inmediatamente:
+
+FANSYCLUB
+
+La idea de:
+
+"Tu mundo. Tus fans. Tu contenido. Tu negocio."
+
+No es necesario bloquear la futura posibilidad de cambiar el slogan.
+
+La landing debe sentirse como una empresa tecnológica real.
+
+Debe incluir visualmente:
+
+- logo
+- propuesta de valor
+- CTA principal
+- CTA secundaria si corresponde
+- explicación breve del producto
+- World
+- Studio
+- personalización
+- comunidad
+- monetización
+
+NO inventar funcionalidades que todavía no existen como si ya estuvieran disponibles.
+
+Si se muestran funciones futuras, marcarlas claramente como visión/futuro o no incluirlas.
+
+==================================================
+LOGIN / REGISTRO
+==================================================
+
+Rediseñar visualmente login y registro para que pertenezcan claramente a FANSYCLUB.
+
+Mantener toda la funcionalidad existente.
+
+Debe sentirse:
+
+- simple
+- confiable
+- moderno
+- rápido
+
+En desktop:
+
+layout amplio y profesional.
+
+En mobile:
+
+layout completamente adaptado.
+
+No hacer formularios pequeños o incómodos.
+
+==================================================
+STUDIO
+==================================================
+
+Mejorar la interfaz existente del Studio.
+
+Debe comenzar a establecer el lenguaje visual que posteriormente utilizaremos en todo FANSYCLUB.
+
+Crear una navegación clara.
+
+Desktop:
+
+sidebar o navegación equivalente.
+
+Mobile:
+
+navigation adaptada al teléfono, por ejemplo mediante drawer/bottom navigation/contextual controls.
+
+No ocultar funciones importantes simplemente porque el usuario está en móvil.
+
+==================================================
+CONTROL CENTER
+==================================================
+
+Mantenerlo visualmente diferenciado del Studio.
+
+Debe sentirse más:
+
+- institucional
+- administrativo
+- seguro
+- profesional
+
+pero seguir perteneciendo a FANSYCLUB.
+
+No hacer que el Control Center parezca otra aplicación completamente diferente.
+
+El logo y sistema visual deben mantener continuidad.
+
+==================================================
+MOBILE FIRST
+==================================================
+
+Este requisito es MUY IMPORTANTE.
+
+FANSYCLUB debe poder utilizarse completamente desde un teléfono móvil.
+
+No quiero solamente responsive CSS.
+
+Diseña las interacciones pensando específicamente en:
+
+- touch
+- pantallas pequeñas
+- botones cómodos
+- navegación móvil
+- formularios móviles
+- paneles adaptativos
+- menús móviles
+- edición móvil
+- acciones rápidas
+
+No depender de hover para funciones esenciales.
+
+No utilizar interacciones que solamente funcionen con mouse.
+
+==================================================
+FUTURO WEBSITE BUILDER
+==================================================
+
+Aunque el editor visual completo pertenece a una fase posterior, la interfaz actual debe dejar preparada la experiencia para un futuro:
+
+"Build your World"
+
+que eventualmente permitirá:
+
+- agregar bloques
+- eliminar bloques
+- reordenar bloques
+- editar contenido
+- cambiar diseño
+- cambiar colores
+- cambiar tipografía
+- visualizar mobile/desktop
+- publicar
+
+No implementar todavía el editor completo.
+
+Pero evita decisiones visuales que dificulten construirlo posteriormente.
+
+==================================================
+ACCESSIBILITY
+==================================================
+
+Aplicar buenas prácticas de accesibilidad:
+
+- contraste adecuado
+- focus states
+- labels
+- navegación por teclado
+- botones suficientemente grandes
+- mensajes de error claros
+- estados visibles
+- estructura semántica
+
+==================================================
+COMPONENTES
+==================================================
+
+Crear o mejorar componentes reutilizables para:
+
+- buttons
+- inputs
+- cards
+- navigation
+- sidebar
+- mobile navigation
+- dialogs
+- badges
+- alerts
+- empty states
+- loading states
+
+Evitar duplicar componentes visualmente equivalentes.
+
+==================================================
+NO HACER
+==================================================
+
+NO modificar:
+
+- database schema
+- authentication logic
+- authorization logic
+- API contracts
+- security architecture
+- session implementation
+- existing backend functionality
+
+salvo que sea estrictamente necesario para corregir un problema causado por la UI.
+
+NO implementar:
+
+- payments
+- store
+- music
+- communities
+- advanced analytics
+- advanced builder
+
+Estos pertenecen a fases posteriores.
+
+==================================================
+CALIDAD
+==================================================
+
+La interfaz debe sentirse como un producto comercial real.
+
+Evita:
+
+- exceso de gradientes
+- exceso de sombras
+- exceso de animaciones
+- interfaces saturadas
+- colores chillones
+- estética genérica de template
+- componentes visualmente inconsistentes
+
+Priorizar:
+
+claridad
+jerarquía
+espaciado
+consistencia
+usabilidad
+personalidad
+
+==================================================
+VERIFICACIÓN
+==================================================
+
+Después de implementar:
+
+1. Ejecuta typecheck.
+
+2. Ejecuta build.
+
+3. Comprueba que la aplicación inicia.
+
+4. Comprueba login.
+
+5. Comprueba registro.
+
+6. Comprueba Studio.
+
+7. Comprueba Control Center.
+
+8. Comprueba que las rutas públicas existentes continúan funcionando.
+
+9. Comprueba específicamente viewport mobile.
+
+10. Comprueba viewport desktop.
+
+11. Verifica que no se rompió ninguna funcionalidad existente.
+
+NO afirmes que algo fue verificado si realmente no lo ejecutaste.
+
+==================================================
+RESULTADO FINAL
+==================================================
+
+Al terminar, proporciona:
+
+1. cambios visuales realizados
+2. sistema de diseño creado
+3. paleta definida
+4. componentes modificados/creados
+5. cambios responsive
+6. cambios en landing
+7. cambios en login/registro
+8. cambios en Studio
+9. cambios en Control Center
+10. pruebas ejecutadas
+11. cualquier problema pendiente
+
+NO avances a la siguiente fase automáticamente.

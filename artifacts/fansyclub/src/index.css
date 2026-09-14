@@ -82,21 +82,32 @@
   --background: 42 47% 95%;
   --foreground: 240 28% 13%;
   --border: 39 23% 83%;
+  --brand-ink: 222 34% 10%;
+  --brand-blue: 213 91% 44%;
+  --brand-blue-deep: 218 89% 31%;
+  --brand-green: 101 68% 47%;
+  --brand-lime: 91 82% 60%;
+  --brand-surface: 210 36% 98%;
+  --brand-surface-strong: 211 29% 93%;
+  --brand-success: 145 54% 42%;
+  --brand-warning: 43 91% 53%;
+  --brand-error: 4 72% 52%;
+  --brand-focus: 213 91% 44%;
   --card: 42 50% 98%;
   --card-foreground: 240 28% 13%;
   --card-border: 39 25% 87%;
   --sidebar: 240 28% 13%;
   --sidebar-foreground: 42 47% 95%;
   --sidebar-border: 240 20% 22%;
-  --sidebar-primary: 13 86% 61%;
+  --sidebar-primary: var(--brand-blue);
   --sidebar-primary-foreground: 240 28% 13%;
   --sidebar-accent: 234 80% 68%;
   --sidebar-accent-foreground: 42 47% 95%;
-  --sidebar-ring: 13 86% 61%;
+  --sidebar-ring: var(--brand-focus);
   --popover: 42 50% 98%;
   --popover-foreground: 240 28% 13%;
   --popover-border: 39 25% 87%;
-  --primary: 13 86% 61%;
+  --primary: var(--brand-blue);
   --primary-foreground: 240 28% 13%;
   --secondary: 234 80% 68%;
   --secondary-foreground: 42 47% 95%;
@@ -107,8 +118,8 @@
   --destructive: 4 72% 52%;
   --destructive-foreground: 42 47% 95%;
   --input: 39 25% 79%;
-  --ring: 13 86% 61%;
-  --chart-1: 13 86% 61%;
+  --ring: var(--brand-focus);
+  --chart-1: var(--brand-blue);
   --chart-2: 234 80% 68%;
   --chart-3: 54 92% 66%;
   --chart-4: 160 54% 49%;
@@ -205,15 +216,15 @@
   --sidebar: 240 30% 9%;
   --sidebar-foreground: 42 47% 95%;
   --sidebar-border: 240 20% 18%;
-  --sidebar-primary: 13 86% 61%;
+  --sidebar-primary: var(--brand-blue);
   --sidebar-primary-foreground: 240 28% 13%;
   --sidebar-accent: 234 80% 68%;
   --sidebar-accent-foreground: 240 28% 13%;
-  --sidebar-ring: 13 86% 61%;
+  --sidebar-ring: var(--brand-focus);
   --popover: 240 23% 17%;
   --popover-foreground: 42 47% 95%;
   --popover-border: 240 20% 25%;
-  --primary: 13 86% 61%;
+  --primary: var(--brand-blue);
   --primary-foreground: 240 28% 13%;
   --secondary: 234 80% 68%;
   --secondary-foreground: 240 28% 13%;
@@ -224,8 +235,8 @@
   --destructive: 4 72% 58%;
   --destructive-foreground: 42 47% 95%;
   --input: 240 20% 30%;
-  --ring: 13 86% 61%;
-  --chart-1: 13 86% 61%;
+  --ring: var(--brand-focus);
+  --chart-1: var(--brand-blue);
   --chart-2: 234 80% 68%;
   --chart-3: 54 92% 66%;
   --chart-4: 160 54% 49%;
@@ -377,12 +388,25 @@
   html { scroll-behavior: smooth; }
   body { min-width: 320px; }
   button, a, input { transition: transform 180ms ease, opacity 180ms ease, background-color 180ms ease, border-color 180ms ease, color 180ms ease; }
+  :focus-visible { outline: 3px solid hsl(var(--brand-focus)); outline-offset: 3px; }
   ::selection { background: hsl(var(--accent)); color: hsl(var(--foreground)); }
 }
 
 @layer utilities {
   .display { font-family: var(--app-font-serif); letter-spacing: -0.055em; }
   .mono-label { font-family: var(--app-font-mono); font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; }
+  .brand-logo { image-rendering: pixelated; }
+  .brand-button-primary {
+    background-color: hsl(var(--brand-blue));
+    color: hsl(0 0% 100%);
+    box-shadow: 0 8px 0 hsl(var(--brand-blue-deep));
+  }
+  .brand-button-primary:hover { background-color: hsl(var(--brand-green)); color: hsl(var(--brand-ink)); }
+  .brand-blue-text { color: hsl(var(--brand-blue)); }
+  .brand-green-text { color: hsl(var(--brand-green)); }
+  .brand-blue-surface { background-color: hsl(var(--brand-blue)); color: hsl(0 0% 100%); }
+  .brand-surface { background-color: hsl(var(--brand-surface)); }
+  .brand-card { border: 1px solid hsl(var(--brand-blue) / .15); background-color: hsl(0 0% 100% / .76); box-shadow: 0 18px 42px -24px hsl(var(--brand-ink) / .32); }
   .paper-grid {
     background-image: linear-gradient(hsl(240 28% 13% / 0.055) 1px, transparent 1px), linear-gradient(90deg, hsl(240 28% 13% / 0.055) 1px, transparent 1px);
     background-size: 34px 34px;

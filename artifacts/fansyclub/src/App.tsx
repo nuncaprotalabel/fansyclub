@@ -44,6 +44,8 @@ import { TooltipProvider } from '@/components/ui/tooltip';
 import NotFound from '@/pages/not-found';
 import { Link, Route, Router as WouterRouter, Switch, useLocation, useParams } from 'wouter';
 
+const brandLogo = '/fansyclub-logo.png';
+
 const queryClient = new QueryClient();
 
 type UserLike = {
@@ -75,9 +77,8 @@ function getErrorMessage(error: unknown, fallback = 'Something went sideways. Tr
 function BrandMark({ inverse = false }: { inverse?: boolean }) {
   return (
     <Link href="/" className="group inline-flex items-center gap-3" data-testid="link-brand-home">
-      <span className={`relative grid h-9 w-9 place-items-center rounded-[11px] border ${inverse ? 'border-[#f8f0df]/25 bg-[#f8f0df]/10' : 'border-[#f04f38]/40 bg-[#f04f38]'}`}>
-        <span className={`h-3.5 w-3.5 rounded-full border-[3px] ${inverse ? 'border-[#f8f0df]' : 'border-[#17162c]'}`} />
-        <span className={`absolute bottom-1.5 right-1.5 h-1.5 w-1.5 rounded-full ${inverse ? 'bg-[#f8e36b]' : 'bg-[#f8e36b]'}`} />
+      <span className={`grid h-10 w-10 place-items-center overflow-hidden rounded-xl border p-0.5 ${inverse ? 'border-white/20 bg-white/10' : 'border-[#0b5ed7]/20 bg-white'}`}>
+        <img src={brandLogo} alt="FANSYCLUB" className="brand-logo h-full w-full object-contain" data-testid="img-brand-logo" />
       </span>
       <span className={`display text-[1.35rem] font-bold tracking-[-0.04em] ${inverse ? 'text-[#f8f0df]' : 'text-[#17162c]'}`}>FANSYCLUB</span>
     </Link>
@@ -86,7 +87,7 @@ function BrandMark({ inverse = false }: { inverse?: boolean }) {
 
 function ButtonLink({ href, children, variant = 'primary', className = '', testId }: { href: string; children: ReactNode; variant?: 'primary' | 'light' | 'ghost'; className?: string; testId: string }) {
   const styles = {
-    primary: 'bg-[#f04f38] text-[#17162c] hover:-translate-y-0.5 hover:bg-[#f76651] shadow-[0_9px_0_#b93526]',
+    primary: 'brand-button-primary hover:-translate-y-0.5',
     light: 'bg-[#f8f0df] text-[#17162c] hover:-translate-y-0.5 hover:bg-white',
     ghost: 'border border-current/20 text-current hover:bg-current/10',
   };
@@ -129,7 +130,7 @@ function Landing() {
               A private creative command center
             </div>
             <h1 className="display rise rise-1 max-w-4xl text-[clamp(3.5rem,8.5vw,8.3rem)] font-semibold leading-[.85] text-[#f8f0df]">
-              Make your <span className="text-[#f04f38]">world</span> impossible to ignore.
+              Make your <span className="brand-blue-text">world</span> impossible to ignore.
             </h1>
             <p className="rise rise-2 mt-8 max-w-xl text-lg leading-relaxed text-[#f8f0df]/65 sm:text-xl">
               FANSYCLUB gives artists, creators, and entrepreneurs the place behind the place — shape the signal, launch the World, keep the keys.
@@ -182,13 +183,13 @@ function Landing() {
           </div>
         </div>
       </section>
-      <section id="studio" className="bg-[#f04f38] px-5 py-20 text-[#17162c] lg:px-10 lg:py-28">
+       <section id="studio" className="brand-blue-surface px-5 py-20 lg:px-10 lg:py-28">
         <div className="mx-auto grid max-w-7xl gap-12 lg:grid-cols-[1fr_1.05fr] lg:items-center">
           <div>
             <p className="mono-label text-[#17162c]/60">02 / INSIDE THE STUDIO</p>
             <h2 className="display mt-5 max-w-xl text-5xl font-semibold leading-[.9] sm:text-7xl">A sharper room for the next move.</h2>
             <p className="mt-7 max-w-md text-lg leading-relaxed text-[#17162c]/70">One place to name the thing, claim the URL, and keep the creative direction yours.</p>
-            <ButtonLink href="/register" variant="ghost" className="mt-8 border-[#17162c]/30" testId="link-studio-cta">Claim your space</ButtonLink>
+             <ButtonLink href="/register" variant="ghost" className="mt-8 border-white/35" testId="link-studio-cta">Claim your space</ButtonLink>
           </div>
           <div className="paper-grid relative min-h-[360px] overflow-hidden rounded-[2rem] border border-[#17162c]/15 bg-[#f8f0df]/70 p-5 sm:p-8">
             <div className="absolute right-[-6%] top-[-10%] h-48 w-48 rounded-full border-[24px] border-[#5f6eea]/50" />
@@ -202,7 +203,7 @@ function Landing() {
                 <span className="mono-label text-[#17162c]/45">01 / NAME IT</span>
                 <p className="display mt-10 text-2xl font-semibold">The first signal is a name.</p>
               </div>
-              <div className="rounded-2xl border border-[#17162c]/15 bg-[#5f6eea] p-5 text-[#f8f0df]">
+               <div className="rounded-2xl border border-white/15 bg-[#4fca3d] p-5 text-[#17162c]">
                 <span className="mono-label text-[#f8f0df]/60">02 / SHARE IT</span>
                 <p className="display mt-10 text-2xl font-semibold">Make the door easy to find.</p>
               </div>
@@ -235,10 +236,10 @@ function AuthLayout({ eyebrow, title, description, children, footer }: { eyebrow
       <div className="grid min-h-[100dvh] lg:grid-cols-[.9fr_1.1fr]">
         <div className="relative hidden overflow-hidden bg-[#17162c] p-10 text-[#f8f0df] lg:flex lg:flex-col lg:justify-between">
           <div className="absolute inset-0 ink-grid opacity-50" />
-          <div className="absolute -bottom-28 -left-20 h-80 w-80 rounded-full border-[30px] border-[#5f6eea]/40" />
+           <div className="absolute -bottom-28 -left-20 h-80 w-80 rounded-full border-[30px] border-[#0b5ed7]/45" />
           <div className="relative"><BrandMark inverse /></div>
           <div className="relative max-w-md">
-            <p className="mono-label text-[#f8e36b]">THE ROOM BEHIND THE ROOM</p>
+             <p className="mono-label text-[#74e84b]">THE ROOM BEHIND THE ROOM</p>
             <p className="display mt-6 text-6xl font-semibold leading-[.88]">Keep the signal close.</p>
             <p className="mt-6 max-w-xs leading-relaxed text-[#f8f0df]/55">Your World starts private. That is where the good decisions happen.</p>
           </div>
@@ -306,7 +307,7 @@ function Register() {
       <FormField label="Email" name="email" type="email" value={email} onChange={setEmail} placeholder="you@yourworld.com" autoComplete="email" />
       <FormField label="Password" name="password" type="password" value={password} onChange={setPassword} placeholder="10 characters minimum" autoComplete="new-password" />
       {register.isError && <FormError message={getErrorMessage(register.error, 'We could not make the account yet.')} />}
-      <button type="submit" disabled={register.isPending} className="mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl bg-[#f04f38] px-5 py-4 font-bold text-[#17162c] shadow-[0_8px_0_#b93526] hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-60" data-testid="button-register-submit">{register.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />} {register.isPending ? 'Setting the room…' : 'Create account'}</button>
+       <button type="submit" disabled={register.isPending} className="brand-button-primary mt-3 inline-flex w-full items-center justify-center gap-2 rounded-xl px-5 py-4 font-bold hover:-translate-y-0.5 disabled:cursor-wait disabled:opacity-60" data-testid="button-register-submit">{register.isPending ? <Loader2 className="h-4 w-4 animate-spin" /> : <Plus className="h-4 w-4" />} {register.isPending ? 'Setting the room…' : 'Create account'}</button>
     </form>
   </AuthLayout>;
 }
@@ -333,7 +334,7 @@ function PrivateShell({ user, children }: { user: UserLike; children: ReactNode 
   const [open, setOpen] = useState(false);
   const signOut = () => logout.mutate(undefined, { onSuccess: () => { client.removeQueries({ queryKey: getGetCurrentUserQueryKey() }); setLocation('/'); } });
   return <div className="noise min-h-[100dvh] bg-[#f8f0df] text-[#17162c]">
-    <header className="sticky top-0 z-20 border-b border-[#f8f0df]/10 bg-[#17162c] text-[#f8f0df]">
+     <header className="sticky top-0 z-20 border-b border-[#0b5ed7]/35 bg-[#17162c] text-[#f8f0df]">
       <div className="mx-auto flex max-w-[1500px] items-center justify-between px-5 py-4 lg:px-8">
         <div className="flex items-center gap-8"><BrandMark inverse /><span className="hidden h-5 w-px bg-[#f8f0df]/20 sm:block" /><span className="mono-label hidden text-[#f8f0df]/45 sm:block">private studio</span></div>
         <button className="rounded-lg p-2 text-[#f8f0df] md:hidden" onClick={() => setOpen(!open)} data-testid="button-mobile-menu">{open ? <X /> : <Menu />}</button>
@@ -401,7 +402,7 @@ function ControlCenterContent({ user }: { user: UserLike }) {
   if (access.isLoading) return <LoadingScreen label="Checking your clearance" />;
   if (access.isError) return <main className="mx-auto max-w-3xl px-5 py-20 lg:px-8"><div className="rounded-3xl border border-[#f04f38]/30 bg-[#f04f38]/10 p-8"><LockKeyhole className="h-9 w-9 text-[#f04f38]" /><h1 className="display mt-8 text-5xl font-semibold">Clearance unavailable.</h1><p className="mt-4 text-[#17162c]/60">{getErrorMessage(access.error)}</p><button onClick={() => access.refetch()} className="mt-7 rounded-xl bg-[#17162c] px-5 py-3 text-sm font-bold text-[#f8f0df]" data-testid="button-retry-access">Check again</button></div></main>;
   if (!access.data?.allowed || (user.role !== 'OWNER' && user.role !== 'STAFF')) return <main className="mx-auto max-w-3xl px-5 py-20 lg:px-8"><div className="relative overflow-hidden rounded-3xl bg-[#17162c] p-8 text-[#f8f0df] sm:p-12"><div className="absolute -right-16 -top-16 h-56 w-56 rounded-full border-[25px] border-[#f04f38]/50" /><ShieldCheck className="relative h-10 w-10 text-[#f8e36b]" /><p className="mono-label relative mt-10 text-[#f8f0df]/45">ACCESS CHECK / {access.data?.role || user.role}</p><h1 className="display relative mt-4 text-5xl font-semibold leading-[.9]">This room is not yours to open.</h1><p className="relative mt-5 max-w-md leading-relaxed text-[#f8f0df]/60">The control center is reserved for OWNER and STAFF roles. Your studio is still entirely yours.</p><Link href="/studio" className="relative mt-8 inline-flex items-center gap-2 rounded-xl bg-[#f8f0df] px-5 py-3 text-sm font-bold text-[#17162c]" data-testid="link-access-denied-studio">Back to studio <ArrowUpRight className="h-4 w-4" /></Link></div></main>;
-  return <main className="mx-auto max-w-[1500px] px-5 py-10 lg:px-8 lg:py-14"><div className="border-b border-[#17162c]/10 pb-10"><p className="mono-label text-[#5f6eea]">FOUNDATION / {user.role}</p><h1 className="display mt-4 text-6xl font-semibold leading-[.85] sm:text-8xl">Control center.</h1><p className="mt-5 max-w-lg text-[#17162c]/55">A quiet view of the foundation beneath every World.</p></div><div className="mt-10 grid gap-5 md:grid-cols-3"><div className="rounded-2xl bg-[#17162c] p-6 text-[#f8f0df]"><TerminalSquare className="h-6 w-6 text-[#f8e36b]" /><p className="mono-label mt-12 text-[#f8f0df]/45">SYSTEM STATUS</p><p className="display mt-3 text-4xl">{health.data?.status || (health.isLoading ? 'Checking…' : 'Offline')}</p></div><div className="rounded-2xl border border-[#17162c]/10 bg-[#fffaf0] p-6"><ShieldCheck className="h-6 w-6 text-[#50b88d]" /><p className="mono-label mt-12 text-[#17162c]/45">YOUR CLEARANCE</p><p className="display mt-3 text-4xl">{access.data.permission}</p><p className="mt-2 text-sm text-[#17162c]/50">Role: {access.data.role}</p></div><div className="rounded-2xl bg-[#5f6eea] p-6 text-[#f8f0df]"><CircleUserRound className="h-6 w-6" /><p className="mono-label mt-12 text-[#f8f0df]/60">SIGNED IN AS</p><p className="display mt-3 text-4xl">{user.username}</p><p className="mt-2 text-sm text-[#f8f0df]/60">{user.email}</p></div></div></main>;
+   return <main className="mx-auto max-w-[1500px] px-5 py-10 lg:px-8 lg:py-14"><div className="border-b border-[#17162c]/10 pb-10"><p className="mono-label brand-blue-text">FOUNDATION / {user.role}</p><h1 className="display mt-4 text-6xl font-semibold leading-[.85] sm:text-8xl">Control center.</h1><p className="mt-5 max-w-lg text-[#17162c]/55">A quiet view of the foundation beneath every World.</p></div><div className="mt-10 grid gap-5 md:grid-cols-3"><div className="rounded-2xl bg-[#17162c] p-6 text-[#f8f0df]"><TerminalSquare className="h-6 w-6 text-[#74e84b]" /><p className="mono-label mt-12 text-[#f8f0df]/45">SYSTEM STATUS</p><p className="display mt-3 text-4xl">{health.data?.status || (health.isLoading ? 'Checking…' : 'Offline')}</p></div><div className="rounded-2xl border border-[#17162c]/10 bg-[#fffaf0] p-6"><ShieldCheck className="h-6 w-6 text-[#4fca3d]" /><p className="mono-label mt-12 text-[#17162c]/45">YOUR CLEARANCE</p><p className="display mt-3 text-4xl">{access.data.permission}</p><p className="mt-2 text-sm text-[#17162c]/50">Role: {access.data.role}</p></div><div className="brand-blue-surface rounded-2xl p-6"><CircleUserRound className="h-6 w-6" /><p className="mono-label mt-12 text-white/70">SIGNED IN AS</p><p className="display mt-3 text-4xl">{user.username}</p><p className="mt-2 text-sm text-white/70">{user.email}</p></div></div></main>;
 }
 
 function PublicWorld() {
@@ -409,8 +410,8 @@ function PublicWorld() {
   const world = useGetPublicWorld(slug, { query: { retry: false, queryKey: getGetPublicWorldQueryKey(slug) } });
   if (world.isLoading) return <LoadingScreen label="Finding the World" />;
   if (world.isError || !world.data) return <main className="grid min-h-[100dvh] place-items-center bg-[#17162c] p-5 text-[#f8f0df]"><div className="max-w-lg text-center"><Globe2 className="mx-auto h-10 w-10 text-[#f8e36b]" /><p className="mono-label mt-8 text-[#f8f0df]/45">WORLD NOT FOUND</p><h1 className="display mt-5 text-6xl font-semibold">This door is elsewhere.</h1><p className="mt-5 text-[#f8f0df]/55">{getErrorMessage(world.error, 'The World may still be private or the link may have changed.')}</p><ButtonLink href="/" variant="light" className="mt-8" testId="link-world-not-found-home">Return home</ButtonLink></div></main>;
-  const data = world.data as WorldLike;
-  return <main className="noise min-h-[100dvh] bg-[#f8f0df] text-[#17162c]"><header className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-10"><BrandMark /><span className="mono-label text-[#17162c]/40">PUBLIC WORLD / {data.status}</span></header><section className="mx-auto grid max-w-7xl gap-12 px-5 pb-20 pt-20 lg:grid-cols-[.95fr_1.05fr] lg:px-10 lg:pt-28"><div><p className="mono-label text-[#f04f38]">A WORLD BY FANSYCLUB</p><h1 className="display mt-6 text-[clamp(4rem,9vw,9rem)] font-semibold leading-[.82]">{data.name}</h1><p className="mt-8 max-w-md text-lg leading-relaxed text-[#17162c]/60">You found the public room. It is still becoming, but the door is open.</p><div className="mt-10 flex items-center gap-2 text-sm font-bold"><span className="h-2 w-2 rounded-full bg-[#50b88d]" /> {data.status === 'PUBLISHED' ? 'Currently open' : 'A work in progress'}</div></div><div className="paper-grid relative min-h-[440px] overflow-hidden rounded-[2rem] bg-[#f04f38] p-7 sm:p-10"><div className="absolute -right-16 -top-16 h-64 w-64 rounded-full border-[35px] border-[#f8e36b]" /><div className="absolute bottom-8 left-8 h-24 w-24 rotate-12 bg-[#5f6eea]" /><div className="relative flex h-full min-h-[380px] flex-col justify-between"><div className="flex justify-between"><span className="mono-label">WORLD / {data.slug}</span><ArrowUpRight className="h-6 w-6" /></div><p className="display max-w-md text-5xl font-semibold leading-[.9] sm:text-7xl">There is more<br />to <span className="text-[#f8f0df]">come.</span></p><div className="flex justify-between border-t border-[#17162c]/20 pt-4 text-xs font-semibold uppercase tracking-[.1em]"><span>owned by an original</span><span>{new Date(data.createdAt).getFullYear()}</span></div></div></div></section><footer className="mx-auto flex max-w-7xl justify-between border-t border-[#17162c]/10 px-5 py-6 text-xs text-[#17162c]/45 lg:px-10"><span>FANSYCLUB FOUNDATION</span><Link href="/register" className="font-bold text-[#f04f38]" data-testid="link-public-world-join">Make your own World <ArrowUpRight className="ml-1 inline h-3.5 w-3.5" /></Link></footer></main>;
+   const data = world.data as WorldLike;
+   return <main className="noise min-h-[100dvh] bg-[#f8f0df] text-[#17162c]"><header className="mx-auto flex max-w-7xl items-center justify-between px-5 py-5 lg:px-10"><BrandMark /><span className="mono-label text-[#17162c]/40">PUBLIC WORLD / {data.status}</span></header><section className="mx-auto grid max-w-7xl gap-12 px-5 pb-20 pt-20 lg:grid-cols-[.95fr_1.05fr] lg:px-10 lg:pt-28"><div><p className="mono-label brand-blue-text">A WORLD BY FANSYCLUB</p><h1 className="display mt-6 text-[clamp(4rem,9vw,9rem)] font-semibold leading-[.82]">{data.name}</h1><p className="mt-8 max-w-md text-lg leading-relaxed text-[#17162c]/60">You found the public room. It is still becoming, but the door is open.</p><div className="mt-10 flex items-center gap-2 text-sm font-bold"><span className="h-2 w-2 rounded-full bg-[#50b88d]" /> {data.status === 'PUBLISHED' ? 'Currently open' : 'A work in progress'}</div></div><div className="paper-grid brand-blue-surface relative min-h-[440px] overflow-hidden rounded-[2rem] p-7 sm:p-10"><div className="absolute -right-16 -top-16 h-64 w-64 rounded-full border-[35px] border-[#74e84b]/70" /><div className="absolute bottom-8 left-8 h-24 w-24 rotate-12 bg-[#4fca3d]" /><div className="relative flex h-full min-h-[380px] flex-col justify-between"><div className="flex justify-between"><span className="mono-label">WORLD / {data.slug}</span><ArrowUpRight className="h-6 w-6" /></div><p className="display max-w-md text-5xl font-semibold leading-[.9] sm:text-7xl">There is more<br />to <span className="text-[#74e84b]">come.</span></p><div className="flex justify-between border-t border-white/20 pt-4 text-xs font-semibold uppercase tracking-[.1em]"><span>owned by an original</span><span>{new Date(data.createdAt).getFullYear()}</span></div></div></div></section><footer className="mx-auto flex max-w-7xl justify-between border-t border-[#17162c]/10 px-5 py-6 text-xs text-[#17162c]/45 lg:px-10"><span>FANSYCLUB FOUNDATION</span><Link href="/register" className="brand-blue-text font-bold" data-testid="link-public-world-join">Make your own World <ArrowUpRight className="ml-1 inline h-3.5 w-3.5" /></Link></footer></main>;
 }
 
 function Router() {
